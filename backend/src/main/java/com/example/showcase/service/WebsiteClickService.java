@@ -1,6 +1,5 @@
 package com.example.showcase.service;
 
-import com.example.showcase.entity.Website;
 import com.example.showcase.entity.WebsiteClick;
 import com.example.showcase.repository.WebsiteClickRepository;
 import com.example.showcase.repository.WebsiteRepository;
@@ -22,25 +21,25 @@ public class WebsiteClickService {
         // 增加网站点击次数
         websiteRepository.incrementClickCount(websiteId);
         
+        // 检查网站是否存在
+        if (!websiteRepository.existsById(websiteId)) {
+            throw new RuntimeException("Website not found with id: " + websiteId);
+        }
+        
         // 记录点击详情
         WebsiteClick click = new WebsiteClick();
+        click.setWebsiteId(websiteId); // 只设置ID，不设置实体关联
         
-        // 获取网站实体
-        Website website = websiteRepository.findById(websiteId).orElse(null);
-        if (website != null) {
-            click.setWebsite(website);
-            
-            // 获取IP地址
-            String ipAddress = getClientIpAddress(request);
-            click.setIpAddress(ipAddress);
-            
-            // 获取User-Agent
-            String userAgent = request.getHeader("User-Agent");
-            click.setUserAgent(userAgent);
-            
-            // 保存点击记录
-            websiteClickRepository.save(click);
-        }
+        // 获取IP地址
+        String ipAddress = getClientIpAddress(request);
+        click.setIpAddress(ipAddress);
+        
+        // 获取User-Agent
+        String userAgent = request.getHeader("User-Agent");
+        click.setUserAgent(userAgent);
+        
+        // 保存点击记录
+        websiteClickRepository.save(click);
     }
     
     private String getClientIpAddress(HttpServletRequest request) {

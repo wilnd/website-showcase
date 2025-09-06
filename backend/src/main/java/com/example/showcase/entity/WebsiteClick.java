@@ -10,9 +10,8 @@ public class WebsiteClick {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "website_id", nullable = false)
-    private Website website;
+    @Column(name = "website_id", nullable = false)
+    private Long websiteId;
     
     @Column(name = "ip_address", length = 45)
     private String ipAddress;
@@ -37,12 +36,12 @@ public class WebsiteClick {
         this.id = id;
     }
     
-    public Website getWebsite() {
-        return website;
+    public Long getWebsiteId() {
+        return websiteId;
     }
     
-    public void setWebsite(Website website) {
-        this.website = website;
+    public void setWebsiteId(Long websiteId) {
+        this.websiteId = websiteId;
     }
     
     public String getIpAddress() {

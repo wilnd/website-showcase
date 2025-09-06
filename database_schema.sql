@@ -26,15 +26,14 @@ CREATE TABLE IF NOT EXISTS website_clicks (
     ip_address VARCHAR(45) COMMENT '点击者IP地址',
     user_agent TEXT COMMENT '用户代理信息',
     clicked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '点击时间',
-    FOREIGN KEY (website_id) REFERENCES websites(id) ON DELETE CASCADE
+    INDEX idx_website_clicks_website_id (website_id),
+    INDEX idx_website_clicks_clicked_at (clicked_at)
 ) COMMENT '网站点击记录表';
 
 -- 添加索引
 CREATE INDEX idx_websites_created_at ON websites (created_at);
 CREATE INDEX idx_websites_is_active ON websites (is_active);
 CREATE UNIQUE INDEX idx_websites_url ON websites (url);
-CREATE INDEX idx_website_clicks_website_id ON website_clicks (website_id);
-CREATE INDEX idx_website_clicks_clicked_at ON website_clicks (clicked_at);
 
 -- 插入示例数据
 INSERT INTO websites (url, title, description, image_url, click_count) VALUES
