@@ -1,0 +1,22 @@
+# 后端相关忽略
+# Maven 编译生成的目标目录
+backend/target/
+
+# 前端相关忽略
+# Node.js 依赖目录
+frontend-admin/node_modules/
+frontend-client/node_modules/
+
+# 前端打包生成的产物（如果有，根据实际打包输出目录调整）
+# 示例：若前端打包输出到 dist 目录
+# frontend-admin/dist/
+# frontend-client/dist/
+
+# IDE 配置文件（这里以 IntelliJ IDEA 为例）
+.idea/
+*.iml
+
+# 系统临时文件等
+.DS_Store
+*.swp
+*.swo

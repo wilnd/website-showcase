@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# 停止网站展示平台
+
+echo "停止网站展示平台..."
+
+# 查找并停止后端服务
+BACKEND_PIDS=$(ps aux | grep 'mvn spring-boot:run' | grep -v grep | awk '{print $2}')
+if [ ! -z "$BACKEND_PIDS" ]; then
+    kill $BACKEND_PIDS
+    echo "后端服务已停止"
+else
+    echo "未找到运行中的后端服务"
+fi
+
+# 查找并停止管理端开发服务器
+ADMIN_PIDS=$(ps aux | grep 'frontend-admin' | grep 'npm start' | grep -v grep | awk '{print $2}')
+if [ ! -z "$ADMIN_PIDS" ]; then
+    kill $ADMIN_PIDS
+    echo "管理端开发服务器已停止"
+else
+    echo "未找到运行中的管理端开发服务器"
+fi
+
+# 查找并停止客户端开发服务器
+CLIENT_PIDS=$(ps aux | grep 'frontend-client' | grep 'npm start' | grep -v grep | awk '{print $2}')
+if [ ! -z "$CLIENT_PIDS" ]; then
+    kill $CLIENT_PIDS
+    echo "客户端开发服务器已停止"
+else
+    echo "未找到运行中的客户端开发服务器"
+fi
+
+echo "所有服务已停止！"
