@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Popconfirm, message } from 'antd';
+import { Table, Button, Popconfirm, message, Tag } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -57,6 +57,14 @@ const WebsiteList = () => {
       title: '描述',
       dataIndex: 'description',
       key: 'description',
+    },
+    {
+      title: '点击次数',
+      dataIndex: 'clickCount',
+      key: 'clickCount',
+      render: (clickCount) => (
+        <Tag color="blue">{clickCount || 0}</Tag>
+      ),
     },
     {
       title: '创建时间',

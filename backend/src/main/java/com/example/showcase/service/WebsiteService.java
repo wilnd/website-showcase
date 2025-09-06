@@ -37,4 +37,9 @@ public class WebsiteService {
     public void deleteWebsite(Long id) {
         websiteRepository.deleteById(id);
     }
+    
+    public int getClickCount(Long websiteId) {
+        Optional<Website> website = websiteRepository.findById(websiteId);
+        return website.map(Website::getClickCount).orElse(0);
+    }
 }

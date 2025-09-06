@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Spin, Alert } from 'antd';
+import { Button, Spin, Alert, Tag } from 'antd';
 import axios from 'axios';
 import API_BASE_URL from '../config/api';
 
@@ -65,7 +65,10 @@ const WebsiteDetail = () => {
       </Button>
       
       <div style={{ textAlign: 'center', marginBottom: 30 }}>
-        <h1>{website.title}</h1>
+        <h1>
+          {website.title}
+          <Tag style={{ marginLeft: 15 }} color="blue">点击: {website.clickCount || 0}</Tag>
+        </h1>
         {website.imageUrl && (
           <img 
             src={website.imageUrl} 

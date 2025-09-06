@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Spin, Alert } from 'antd';
+import { Card, Button, Spin, Alert, Tag } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_BASE_URL from '../config/api';
@@ -56,8 +56,16 @@ const WebsiteList = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore, page]);
 
-  const handleViewDetail = (id) => {
-    navigate(`/websites/${id}`);
+  const handleViewDetail = async (website) => {
+    // 记录点击
+    try {
+      await axios.post(`${API_BASE_URL}/api/websites/${website.id}/click`);
+    } catch (error) {
+      console.error('记录点击失败:', error);
+    }
+    
+    // 跳转到详情页
+    navigate(`/websites/${website.id}`);
   };
 
   if (websites.length === 0 && loading) {
@@ -84,13 +92,18 @@ const WebsiteList = () => {
             )
           }
           actions={[
-            <Button type="primary" onClick={() => handleViewDetail(website.id)}>
+            <Button type="primary" onClick={() => handleViewDetail(website)}>
               查看详情
             </Button>
           ]}
         >
           <Card.Meta
-            title={website.title}
+            title={
+              <div>
+                {website.title}
+                <Tag style={{ marginLeft: 10 }} color="blue">点击: {website.clickCount || 0}</Tag>
+              </div>
+            }
             description={
               <div>
                 <div>{website.description}</div>

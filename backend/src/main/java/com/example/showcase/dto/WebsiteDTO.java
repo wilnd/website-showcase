@@ -20,6 +20,8 @@ public class WebsiteDTO {
     @Size(max = 500, message = "图片URL长度不能超过500个字符")
     private String imageUrl;
     
+    private Integer clickCount = 0;
+    
     // Getters and Setters
     public Long getId() {
         return id;
@@ -59,5 +61,13 @@ public class WebsiteDTO {
     
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    
+    public Integer getClickCount() {
+        return clickCount;
+    }
+    
+    public void setClickCount(Integer clickCount) {
+        this.clickCount = clickCount;
     }
 }

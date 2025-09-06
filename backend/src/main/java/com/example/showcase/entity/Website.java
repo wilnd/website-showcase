@@ -22,6 +22,9 @@ public class Website {
     @Column(name = "image_url", length = 500)
     private String imageUrl;
     
+    @Column(name = "click_count")
+    private Integer clickCount = 0;
+    
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
@@ -81,6 +84,14 @@ public class Website {
     
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    
+    public Integer getClickCount() {
+        return clickCount;
+    }
+    
+    public void setClickCount(Integer clickCount) {
+        this.clickCount = clickCount;
     }
     
     public LocalDateTime getCreatedAt() {
