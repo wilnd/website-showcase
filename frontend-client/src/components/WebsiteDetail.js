@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Spin, Alert } from 'antd';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const WebsiteDetail = () => {
   const [website, setWebsite] = useState(null);
@@ -13,7 +14,7 @@ const WebsiteDetail = () => {
   useEffect(() => {
     const fetchWebsite = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/websites/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/websites/${id}`);
         setWebsite(response.data);
       } catch (err) {
         setError('获取网站详情失败');

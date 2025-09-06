@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const WebsiteForm = () => {
   const [form] = Form.useForm();
@@ -17,7 +18,7 @@ const WebsiteForm = () => {
 
   const fetchWebsite = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/websites/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/api/websites/${id}`);
       form.setFieldsValue(response.data);
     } catch (error) {
       message.error('获取网站信息失败');
@@ -29,11 +30,11 @@ const WebsiteForm = () => {
     try {
       if (id) {
         // 更新
-        await axios.put(`http://localhost:8080/api/websites/${id}`, values);
+        await axios.put(`${API_BASE_URL}/api/websites/${id}`, values);
         message.success('更新成功');
       } else {
         // 创建
-        await axios.post('http://localhost:8080/api/websites', values);
+        await axios.post(`${API_BASE_URL}/api/websites`, values);
         message.success('创建成功');
       }
       navigate('/websites');

@@ -3,6 +3,7 @@ import { Table, Button, Popconfirm, message } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const WebsiteList = () => {
   const [websites, setWebsites] = useState([]);
@@ -12,7 +13,7 @@ const WebsiteList = () => {
   const fetchWebsites = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8080/api/websites');
+      const response = await axios.get(`${API_BASE_URL}/api/websites`);
       setWebsites(response.data.content);
     } catch (error) {
       message.error('获取网站列表失败');
@@ -27,7 +28,7 @@ const WebsiteList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/websites/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/websites/${id}`);
       message.success('删除成功');
       fetchWebsites();
     } catch (error) {

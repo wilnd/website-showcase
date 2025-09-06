@@ -83,6 +83,20 @@ npm start
 
 客户端将运行在 `http://localhost:3011`
 
+## 环境变量配置
+
+前端项目使用环境变量来配置API地址，可以在 `.env` 文件中修改：
+
+- `frontend-admin/.env` - 管理端环境变量
+- `frontend-client/.env` - 客户端环境变量
+
+默认配置：
+```
+REACT_APP_API_BASE_URL=http://localhost:8010
+```
+
+如果需要部署到不同的环境，只需修改 `.env` 文件中的 `REACT_APP_API_BASE_URL` 值。
+
 ## 启动方式
 
 ### 自动后台启动（推荐用于部署）

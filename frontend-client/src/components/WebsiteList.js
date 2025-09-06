@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Spin, Alert } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import './WebsiteList.css';
 
 const WebsiteList = () => {
@@ -16,7 +17,7 @@ const WebsiteList = () => {
     
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/websites?page=${pageNum}&size=10`);
+      const response = await axios.get(`${API_BASE_URL}/api/websites?page=${pageNum}&size=10`);
       const newWebsites = response.data.content;
       
       if (pageNum === 0) {
