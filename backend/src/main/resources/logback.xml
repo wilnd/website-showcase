@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds"> <!-- 30秒自动扫描配置更新 -->
+    <!-- 1. 定义日志输出格式 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+
+    <!-- 2. 定义日志输出路径（可自定义，如 logs/ 目录） -->
+    <property name="LOG_PATH" value="logs" />
+
+    <!-- 3. 控制台输出（开发环境常用） -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset> <!-- 避免中文乱码 -->
+        </encoder>
+    </appender>
+
+    <!-- 4. 文件输出（按天滚动，避免单个日志文件过大） -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件路径 + 文件名 -->
+        <file>${LOG_PATH}/app.log</file>
+
+        <!-- 滚动策略：按天分割，保留30天日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- 保留30天历史日志 -->
+            <totalSizeCap>10GB</totalSizeCap> <!-- 总日志大小上限，避免磁盘占满 -->
+        </rollingPolicy>
+
+        <!-- 日志格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 5. 全局日志级别（DEBUG < INFO < WARN < ERROR，级别越高输出越少） -->
+    <!-- 开发环境用 DEBUG，生产环境用 INFO 或 WARN -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" /> <!-- 同时输出到控制台 -->
+        <appender-ref ref="FILE" />    <!-- 同时输出到文件 -->
+    </root>
+
+    <!-- （可选）指定某个包的日志级别（覆盖全局配置） -->
+    <!-- 如：让 com.yourproject 包的日志级别为 DEBUG，其他包为 INFO -->
+    <logger name="com.yourproject" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+</configuration>

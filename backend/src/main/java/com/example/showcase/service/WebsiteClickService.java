@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 @Service
 public class WebsiteClickService {
@@ -16,7 +17,8 @@ public class WebsiteClickService {
     
     @Autowired
     private WebsiteRepository websiteRepository;
-    
+
+    @Transactional
     public void recordClick(Long websiteId, HttpServletRequest request) {
         // 增加网站点击次数
         websiteRepository.incrementClickCount(websiteId);

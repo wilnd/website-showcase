@@ -23,39 +23,54 @@
     <properties>
         <java.version>11</java.version>
     </properties>
-    
+
     <dependencies>
+        <!-- 1. Spring Boot Web 依赖（已包含 spring-boot-starter-logging，自带 SLF4J + Logback） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 无需排除任何依赖！保留默认日志组件 -->
         </dependency>
-        
+
+        <!-- 2. JPA 依赖（仅保留1份） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        
+
+        <!-- 3. MySQL 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
+        <!-- 4. 参数校验 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        
+
+        <!-- 5. 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
+        <!-- 6. Servlet API（按需保留，若用嵌入式 Tomcat 可删除，Spring Boot 已包含） -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok 依赖：升级到 1.18.30（适配 JDK 11，兼容 Spring Boot 2.7.0） -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- 关键：升级到适配 JDK 11 的版本 -->
             <scope>provided</scope>
         </dependency>
     </dependencies>
