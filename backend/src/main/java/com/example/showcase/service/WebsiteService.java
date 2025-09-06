@@ -27,7 +27,7 @@ public class WebsiteService {
     
     public Page<Website> getWebsites(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return websiteRepository.findByIsActiveTrueOrderByCreatedAtDesc(pageable);
+        return websiteRepository.findByIsActiveTrueOrderByClickCountDesc(pageable);
     }
     
     public List<Website> getAllWebsites() {
