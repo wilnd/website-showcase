@@ -6,9 +6,9 @@
 
 ```
 my-website-showcase/
-├── backend/           # Java后端服务
-├── frontend-admin/    # 管理端前端 (端口: 3000)
-├── frontend-client/   # 客户端前端 (端口: 3001)
+├── backend/           # Java后端服务 (端口: 8010)
+├── frontend-admin/    # 管理端前端 (端口: 3010)
+├── frontend-client/   # 客户端前端 (端口: 3011)
 ├── DATABASE_DESIGN.md # 数据库设计
 └── database_schema.sql # 数据库初始化脚本
 ```
@@ -61,7 +61,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 mvn spring-boot:run -Dspring-boot.run.profiles=remote
 ```
 
-后端服务将运行在 `http://localhost:8080`
+后端服务将运行在 `http://localhost:8010`
 
 ### 3. 管理端启动
 
@@ -71,7 +71,7 @@ npm install
 npm start
 ```
 
-管理端将运行在 `http://localhost:3000`
+管理端将运行在 `http://localhost:3010`
 
 ### 4. 客户端启动
 
@@ -81,7 +81,26 @@ npm install
 npm start
 ```
 
-客户端将运行在 `http://localhost:3001`
+客户端将运行在 `http://localhost:3011`
+
+## 启动方式
+
+### 自动后台启动（推荐用于部署）
+```bash
+# 启动所有服务（后台运行）
+./start.sh
+
+# 停止所有服务
+./stop.sh
+```
+
+### 手动前台启动（推荐用于开发调试）
+```bash
+# 查看手动启动命令
+./manual-start.sh
+```
+
+手动启动时，请在不同的终端窗口中分别运行各个服务的启动命令，这样可以实时查看每个服务的输出日志。
 
 ## 配置文件说明
 
@@ -94,9 +113,9 @@ npm start
 
 ## 端口配置
 
-- 后端API: http://localhost:8080
-- 管理端前端: http://localhost:3000
-- 客户端前端: http://localhost:3001
+- 后端API: http://localhost:8010
+- 管理端前端: http://localhost:3010
+- 客户端前端: http://localhost:3011
 
 ## 部署指南
 
