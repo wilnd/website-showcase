@@ -13,7 +13,8 @@ import java.util.List;
 
 @Repository
 public interface WebsiteRepository extends JpaRepository<Website, Long> {
-    Page<Website> findByIsActiveTrueOrderByCreatedAtDesc(Pageable pageable);
+    Page<Website> findByIsActiveTrueOrderByClickCountDesc(Pageable pageable);
+
     List<Website> findByIsActiveTrueOrderByCreatedAtDesc();
 
     @Modifying
