@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>网站展示平台</h1>
+          <h1>村长个人网站墙</h1>
         </header>
         <main>
           <Routes>
